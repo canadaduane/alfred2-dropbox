@@ -1,6 +1,7 @@
 require 'dropbox-api'
 require 'yaml'
 require 'base64'
+require 'alfred'
 
 bundle_settings = YAML::load(IO.read("bundle_settings.yml"))
 
@@ -26,8 +27,18 @@ module Dropbox
     filepath[(root.size)..-1] if file?(filepath)
   end
 
+  def self.dropbox_yml
+    File.join(AlfredInit.new.storage_path, 'dropbox.yml')
+  end
+
   def self.settings
-    @settings ||= YAML::load(IO.read("dropbox.yml"))
+    @settings ||= YAML::load(IO.read(dropbox_yml))
+  end
+
+  def self.overwrite_settings(settings)
+    File.open(dropbox_yml, "w") do |file|
+      file.write YAML::dump(settings)
+    end
   end
 
   def self.client

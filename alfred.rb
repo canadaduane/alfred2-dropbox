@@ -5,7 +5,7 @@ require 'fileutils'
 class AlfredInit
   attr_reader :query
 
-  def initialize(query)
+  def initialize(query=nil)
     @query = query
     if bundle_id
       init_dir(temp_storage_path)

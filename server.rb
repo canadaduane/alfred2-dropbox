@@ -19,6 +19,7 @@ def oauth_callback
   "#{@env['rack.url_scheme']}://#{request.host_with_port}/"
 end
 
+
 get '/success' do
   erb :success
 end
@@ -27,12 +28,11 @@ get '/' do
   if params[:oauth_token] then
     @request_token = YAML::load(session[:dropbox_request_token])
     result = @request_token.get_access_token(:oauth_verifier => params[:oauth_token])
-    File.open("dropbox.yml", "w") do |file|
-      file.write YAML::dump({
-        "access_token" => result.token,
-        "access_secret" => result.secret
-      })
-    end
+
+    Dropbox.overwrite_settings({
+      "access_token" => result.token,
+      "access_secret" => result.secret
+    })
 
     erb :success
   else

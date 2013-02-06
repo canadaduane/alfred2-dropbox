@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string></string>
+	<string>dropbox</string>
 	<key>connections</key>
 	<dict>
 		<key>745E2F73-3A8D-4373-AC7E-367961F830E5</key>
@@ -40,7 +40,7 @@
 	<key>createdby</key>
 	<string>Duane Johnson</string>
 	<key>description</key>
-	<string></string>
+	<string>Dropbox OAuth Connector for Short Links etc</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -170,6 +170,6 @@ end</string>
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/canadaduane/alfred2-dropbox</string>
 </dict>
 </plist>
