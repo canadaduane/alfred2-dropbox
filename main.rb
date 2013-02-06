@@ -20,4 +20,9 @@ if not Dropbox.authorized?
   # puts "status: #{status}"
 end
 
-Dropbox.client.find(Alfred.query).share_url
+if Dropbox.file?(Alfred.query)
+  dbox_file = Dropbox.relative_to_root(Alfred.query)
+  puts Dropbox.client.find(dbox_file).share_url.url
+else
+  puts "Not a Dropbox file"
+end
