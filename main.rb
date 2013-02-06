@@ -1,11 +1,23 @@
 require 'rubygems'
-require 'open4'
+require 'dropbox'
 
-random_port = rand(1000) + 3001
-command = "/usr/bin/ruby server.rb #{random_port}"
-status = Open4::popen4(command) do |pid, stdin, stdout, stderr|
-  puts "PID #{pid}" 
+if not Dropbox.authorized?
+  require 'port_checker'
+  port = PortChecker.first_available(3000..3200)
+
+  ping_pid = fork do
+    while not PortChecker.open? port
+      sleep 0.3
+    end
+    `open http://localhost:#{port}`
+  end
+
+  command = "/usr/bin/ruby server.rb -p #{port}"
+  output = `#{command}`
+  status = $?
+
+  # puts "output: #{output}"
+  # puts "status: #{status}"
 end
 
-puts status
-
+Dropbox.client.find(Alfred.query).share_url
