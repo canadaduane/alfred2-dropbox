@@ -22,7 +22,14 @@ end
 
 if Dropbox.file?(Alfred.query)
   dbox_file = Dropbox.relative_to_root(Alfred.query)
-  puts Dropbox.client.find(dbox_file).share_url.url
+  file = Dropbox.client.find(dbox_file)
+  case (URL_TYPE or 'share')
+  when 'share':    puts file.share_url.url
+  when 'direct': puts file.direct_url.url
+  else
+    puts "Oops, the workflow had an error"
+    raise "Unknown URL type: #{$1}"
+  end
 else
   puts "Not a Dropbox file"
 end
