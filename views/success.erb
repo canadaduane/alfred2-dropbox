@@ -3,15 +3,17 @@
   <script src="/jquery.js"></script>
   <script>
   $(function() {
-    $.ajax({
-      url: '/exit', 
-      success: function() {
-        $('#add-on-message').html('(You can close this tab)');
-      },
-      error: function() {
-        $('#add-on-message').html('(But there was an error shutting down the local auth server)');
-      }
-    });
+    setTimeout(function() {
+      $.ajax({
+        url: '/exit', 
+        success: function() {
+          $('#add-on-message').html('(You can close this tab)');
+        },
+        error: function() {
+          $('#add-on-message').html('(But there was an error shutting down the local auth server)');
+        }
+      })
+    }, 1500);
   });
   </script>
   <style>
