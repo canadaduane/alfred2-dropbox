@@ -5,8 +5,8 @@ require 'alfred'
 
 bundle_settings = YAML::load(IO.read("bundle_settings.yml"))
 
-Dropbox::API::Config.app_key    = bundle_settings['dropbox_app_key']
-Dropbox::API::Config.app_secret = bundle_settings['dropbox_app_secret']
+Dropbox::API::Config.app_key    = Base64.decode64 bundle_settings['dropbox_app_key']
+Dropbox::API::Config.app_secret = Base64.decode64 bundle_settings['dropbox_app_secret']
 Dropbox::API::Config.mode       = 'dropbox'
 
 module Dropbox
