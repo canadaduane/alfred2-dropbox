@@ -46,6 +46,7 @@ get '/' do
 end
 
 get '/exit' do
-  exit!
+  exit!add file placement
   'ok'
 end
+Catalog of 3D printed parts used to fix up or otherwise enhance my house. Also includes issue tracker for things needing handyman attention.
